@@ -6,7 +6,7 @@ We started it internally as well and we had so much fun that we did a Knowledge 
 
 Here an overview of it 
 
-![Song Overview](./_pkg/img.jpg)
+![Song Overview](./_pkg/img.jpeg)
 
 ---
 
