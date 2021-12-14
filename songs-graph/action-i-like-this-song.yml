@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: i-like-this-song-too
+  tags:
+    - default
+    - all
+spec:
+  label: 'I like this song too !'
+  query: |
+    MERGE (u:User {username: $_hume_principal})
+    WITH u
+    MATCH (n) WHERE id(n) = $id
+    MERGE (u)-[r:LIKES_SONG]->(n)
+    RETURN u, r, n
+  scope: LOCAL
+  returnType: GRAPH
+  inclusions:
+    labels: ['Song']
+  selection: nodeId
+

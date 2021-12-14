@@ -1,0 +1,17 @@
+version: 1
+metadata:
+  name: public-hume-instance
+imports:
+  - ./songs-graph
+config:
+  - name: system.orchestra.experimental_enabled
+    value: true
+users: []
+roles:
+  - name: SONGS_EXPLORER
+  - name: EXTERNAL_APP
+keys:
+  - name: GRAPHQL_KEY
+    roles:
+      - EXTERNAL_APP
+    token: ${env:HUME_GRAPHQL_TOKEN}

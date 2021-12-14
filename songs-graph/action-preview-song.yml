@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: preview-song
+  tags:
+    - default
+    - all
+spec:
+  label: 'Preview Song'
+  query: |
+    MATCH (n) WHERE id(n) = $id
+    WITH split(replace(n.url, '?v=', '/'),'/') AS parts
+    WITH parts[size(parts)-1] AS songId
+    RETURN '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="788.54" height="443" 
+    type="text/html" src="https://www.youtube.com/embed/' + songId 
+    + '?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=http://youtubeembedcode.com">
+    <div><small><a href="https://youtubeembedcode.com/en">youtubeembedcode en</a></small></div>
+    </iframe>' AS link
+  scope: LOCAL
+  returnType: TABLE
+  inclusions:
+    labels: ['Song']
+  selection: nodeId
+

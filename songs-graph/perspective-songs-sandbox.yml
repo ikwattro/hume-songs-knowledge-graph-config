@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Perspective
+metadata:
+  name: sandbox-perspective
+spec:
+  label: Main Perspective
+  resource:
+    selector:
+      name: neo4j-songs
+  synced: true
+  actions:
+    include:
+      - tag@all

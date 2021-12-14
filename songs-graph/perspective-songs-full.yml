@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Perspective
+metadata:
+  name: songs-main-perspective
+spec:
+  label: Main Perspective
+  access:
+    - role: SONGS_EXPLORER
+      grant_type: PERSPECTIVE_USE
+    - role: EXTERNAL_APP
+      grant_type: PERSPECTIVE_USE
+  resource:
+    selector:
+      name: neo4j-songs
+  synced: true
+  actions:
+    include:
+      - tag@default

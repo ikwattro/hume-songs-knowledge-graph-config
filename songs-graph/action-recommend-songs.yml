@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: recommend-me-songs
+  tags:
+    - default
+    - all
+spec:
+  label: 'Recommend me Songs'
+  query: |
+    MATCH (n:User {username: $_hume_principal})
+    MATCH p=(n)-[:LIKES_SONG]->(song)<-[:SHARED]-(person)-[:SHARED]->(o)
+    WHERE NOT (n)-[:LIKES_SONG]->(o)
+    RETURN p, id(o) AS __highlightNode__ LIMIT 10
+  scope: GLOBAL
+  returnType: GRAPH

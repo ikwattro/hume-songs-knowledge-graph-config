@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: find-all
+  tags:
+    - default
+    - all
+spec:
+  label: 'All Nodes And Rels'
+  query: |
+    MATCH (n:Person)
+    OPTIONAL MATCH (n)-[r]-(x)
+    RETURN n, r, x
+    LIMIT 1000
+  scope: GLOBAL
+  returnType: GRAPH

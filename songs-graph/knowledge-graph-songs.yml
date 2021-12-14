@@ -1,0 +1,141 @@
+apiVersion: v1
+kind: KnowledgeGraph
+metadata:
+  name: songs-kg
+  labels:
+    cto.hume.io/tier: songs-core
+spec:
+  label: Songs
+  access:
+    - role: SONGS_EXPLORER
+      grant_type: EXPLORER
+    - role: EXTERNAL_APP
+      grant_type: EXPLORER
+  perspectives:
+    - songs-main-perspective
+    - sandbox-perspective
+  workflows: []
+  actions:
+    - find-all
+    - i-like-this-song-too
+    - recommend-me-songs
+    - preview-song
+  schema:
+    classes:
+      - label: Song
+        color: '#6200EA'
+        icon: mdi-music
+        attributes:
+          - label: title
+            type: STRING
+            full_text: true
+          - label: url
+            type: STRING
+            full_text: true
+          - label: explicit
+            type: STRING
+      - label: Person
+        color: '#26A69A'
+        icon: person
+        attributes:
+          - label: name
+            type: STRING
+            full_text: true
+          - label: louvainGenre
+            type: INTEGER
+      - label: Artist
+        color: '#FFAB00'
+        icon: mdi-account-group
+        attributes:
+          - label: name
+            type: string
+            full_text: true
+      - label: Tag
+        color: '#1E88E5'
+        icon: mdi-bookmark-outline
+        attributes:
+          - label: name
+            type: string
+            full_text: true
+      - label: User
+        color: '#4527A0'
+        icon: person
+        attributes:
+          - label: username
+            type: string
+            full_text: true
+      - label: Genre
+        color: '#42A5F5'
+        icon: mdi-folder-star-outline
+        attributes:
+          - label: name
+            type: string
+            full_text: true
+      - label: Album
+        color: '#37474F'
+        icon: mdi-record
+        attributes:
+          - label: artwork100
+            type: string
+          - label: iTunesUrl
+            type: string
+          - label: name
+            type: string
+            full_text: true
+      - label: Award
+        color: '#FFCA28'
+        icon: mdi-trophy-outline
+        attributes:
+          - label: year
+            type: INTEGER
+      - label: GrammyCategory
+        color: '#9CCC65'
+        icon: mdi-music-note-sixteenth
+        attributes:
+          - label: name
+            type: string
+            full_text: true
+      - label: Grammy
+        color: '#FFB300'
+        icon: mdi-saxophone
+        attributes:
+          - label: title
+            type: string
+            full_text: true
+    relationships:
+      - label: TAGGED
+        start: Song
+        end: Tag
+      - label: SHARED
+        start: Person
+        end: Song
+      - label: ARTIST
+        start: Song
+        end: Artist
+      - label: LIKES_SONG
+        start: User
+        end: Song
+      - label: GENRE
+        start: Song
+        end: Genre
+      - label: GENRE
+        start: Artist
+        end: Genre
+      - label: HAS_TRACK
+        start: Album
+        end: Song
+      - label: AWARD
+        start: Song
+        end: Award
+      - label: AWARD
+        start: Artist
+        end: Award
+      - label: AWARD
+        start: Album
+        end: Award
+      - label: GRAMMY
+        start: Award
+        end: Grammy
+      - label: GRAMMY_CATEGORY
+        start: Award
+        end: GrammyCategory
