@@ -34,6 +34,10 @@ spec:
             full_text: true
           - label: explicit
             type: STRING
+          - label: spotify_uri
+            type: STRING
+          - label: wikidata_id
+            type: STRING
       - label: Person
         color: '#26A69A'
         icon: person
@@ -102,6 +106,15 @@ spec:
           - label: title
             type: string
             full_text: true
+      - label: Category
+        color: '#906C23'
+        icon: mdi-file-document-multiple-outline
+        attributes:
+          - label: name
+            type: string
+            full_text: true
+          - label: wikipediaUrl
+            type: string
     relationships:
       - label: TAGGED
         start: Song
@@ -139,3 +152,9 @@ spec:
       - label: GRAMMY_CATEGORY
         start: Award
         end: GrammyCategory
+      - label: INFLUENCED_BY
+        start: Artist
+        end: Artist
+      - label: SONG_CATEGORY
+        start: Song
+        end: Category
